@@ -1,0 +1,1125 @@
+html,body{
+  margin: 0px;
+  height: 100%;
+}
+ul,ol,li {
+  margin: 0px;
+  padding: 0px;
+}
+#app {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  min-width: 320px;
+}
+.container {
+  flex: 1;
+}
+#home-page {
+  flex: 1;
+}
+.home-header {
+    width: 100%;
+    height: 30px;
+    margin-top: -5px;
+    padding: 10px 0px;
+    text-align: left;
+    // background: #126dcc;
+    .live-update-switch {
+      margin-left: 10px;
+      span {
+        font-size: 14px;
+      }
+    }
+  }
+  .home-search {
+    float: right;
+    margin: 60px 60px 0 0;
+  }
+  // 头部
+  #header {
+    background: linear-gradient(45deg, black, #898989);
+    color: rgba(245, 237, 237, 0.973);
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 110px;
+    padding: 0 10px;
+    margin-bottom: 10px;
+    .header-title {
+      position: absolute;
+      top: 25px;
+    }
+    .erc20-header-div {
+      width: 200px;
+      margin-left: 35%;
+    }
+    .erc20-header-div:hover {
+      width: 200px;
+      margin-left: 35%;
+      color: #409eff;
+    }
+  }
+  .header-search-box {
+    display: inline-block;
+    position: absolute;
+    right: 10px;
+    left: 10px;
+    top: 60px;
+    white-space: nowrap;
+  }
+  // #header {
+  //   background: #126dcc;
+  //   height: 120px;
+  // }
+  // .header-content {
+  //   font-size: 14px;
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: space-between;
+  //   min-height: 50px;
+  //   margin: 0px 10px;
+  //   color: #6c757e;
+  //   .title {
+  //     font-size: 16px;
+  //     word-break: keep-all;
+  //     color: #fff;
+  //     cursor: pointer;
+  //   }
+  //   .erc20-header-div{
+  //     position: absolute;
+  //     right: 10px;
+  //   }
+  //   .erc20-btn{
+  //     border: 0px;
+  //     background: center;
+  //     color: #fff;
+  //     font-size: 16px;
+  //     padding: 0px;
+  //     margin: 0px;
+  //   }
+  // }
+  // .header-search-box {
+  //   display: inline-block;
+  //   position: absolute;
+  //   right: 10px;
+  //   top: 60px;
+  //   left: 10px;
+  //   white-space: nowrap;
+  // }
+  .el-dropdown-link {
+    color: #fff;
+  }
+  .el-dropdown {
+    display: inline-block;
+    position: absolute;
+    right: 10px;
+    top: 28px;
+    color: #222222;
+    font-size: 14px;
+  }
+ // 底部
+ .micro-chain-footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 12px;
+  height: 50px;
+  background: linear-gradient(45deg, black, #898989);
+  color: rgba(245, 237, 237, 0.973);
+  span {
+    line-height: 25px;
+  }
+}
+//  #footer {
+//    text-align: left;
+//    margin-top: 20px;
+//    height: 70px;
+//    width:100%;
+//    background: #126dcc;
+//    .company {
+//     color: #fff;
+//     font-size: 12px;
+//     position: relative;
+//     left: 10px;
+//     top: 30px;
+//     cursor: default;
+//    }
+//  }
+  // 搜索框
+  .search-box .el-input {
+    width: calc(100% - 70px);
+  }
+  .search-box .el-button {
+    background: #409eff !important;
+    width: 70px;
+  }
+//   .search-box {
+//     border: 1px solid #fff;
+//     border-radius: 10px;
+// }
+// .search-box .el-input {
+//     input {
+//       color: #fff;
+//       border: 0px;
+//       border-radius: 20px;
+//       background: #126dcc;
+//     }
+//   }
+//   .search-box .el-input-group__append {
+//     border: 0px;
+//     background: #126dcc;
+//     border-radius: 20px;
+//     button {
+//       background: #126dcc;
+//       border-radius: 20px;
+//       color: #fff;
+//     }
+//   }
+  // 分页组件
+  .el-pagination {
+    white-space: normal;
+    padding: 2px 10px;
+    text-align: left;
+  }
+  .el-pagination__total {
+    margin: 0px;
+    margin: 0px;
+    width: calc(100% - 20px);
+    float: left;
+    text-align: left;
+  }
+  .el-pagination .el-select .el-input {
+    margin: 0px;
+  }
+  .el-pagination__jump {
+    margin: 0px;
+  }
+  .el-pagination__sizes {
+    display: none ;
+  }
+  .el-pager li {
+    display: none;
+  }
+  .el-pager li.active {
+    display: list-item;
+  }
+  // 表格适应
+  .latest-trade-table-width {
+    width: 1320px;
+    max-width: 1320px;
+  }
+  .table-fixed {
+    overflow: auto;
+  }
+  // 应用链信息
+  .micro-chain {
+    margin: 10px 10px 0px 10px;
+    border: 1px solid #c1e9f1;
+  }
+  .micro-chain-div {
+    padding-inline-start: 10px;
+    padding-inline-end: 10px;
+    width: auto;
+    overflow: hidden;
+    overflow-y: auto;
+    // height: 170px;
+    background: #ffffff;
+    margin-bottom: 20px;
+    li {
+      // display: flex;
+      justify-content: space-between;
+      overflow: hidden;
+      font-size: 14px;
+      line-height: 40px;
+      color: #5f5d5d;
+      border-bottom: 1px solid #e0e8ed;
+    }
+    span {
+      float: left;
+      word-break: keep-all;
+    }
+  }
+  .micro-chain-li-scs {
+    display: flex;
+    align-items: center;
+    .el-select {
+      width: 220px;
+    }
+  }
+  .el-select-dropdown__item {
+    font-size: 10px;
+  }
+  .micro-chain-li-div {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    overflow-x: auto;
+  }
+  .micro-chain-li-div1 {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    position: relative;
+    width: 10%;
+    bottom: 28px;
+  }
+  // 交易曲线图
+  .curve-top {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  .curve-div {
+    height: 300px;
+    width: 100%;
+    // margin: 0px 20px;
+  }
+  .trade-curve {
+    margin: 0 10px;
+  }
+  .trade-curve-header {
+    height: 22%;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .trade-curve-div {
+    display: flex;
+    align-items: center;
+  }
+  .trade-curve-title {
+    height: 28px;
+    min-width: 100px;
+    padding: 0px 3px;
+    background: #409eff;
+    border-radius:  0 13px 13px 0;
+    color: #f2f8fc;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+  .show-more-trade {
+    width: 150px;
+    color: #9daebb;
+    font-size: 14px;
+    position: relative;
+  }
+  .show-more-trade:hover {
+    color: #18c9dd;
+    cursor: pointer;
+  }
+  .show-more-trade-title {
+    position: absolute;
+    right: 0;
+  }
+  .trade-curve-table {
+    margin-top: 10px;
+    border: 1px solid #c1e9f1;
+  }
+  .trade-curve-hash {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #6f6868;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .trade-curve-hash:hover {
+    color: #06aaf9;
+    font-weight: bold;
+  }
+  .trade-curve-nodata {
+    color: #cbd4e2;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+    i {
+      font-size: 50px;
+    }
+  }
+  // 最新区块信息
+  .block {
+    font-size: 14px;
+  }
+  .block-header {
+    margin: 10px 10px 10px 10px;
+    height: 22%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .block-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .block-span {
+    height: 28px;
+    min-width: 100px;
+    padding: 0px 3px;
+    background: #409eff;
+    border-radius:  0 13px 13px 0;
+    color: #f2f8fc;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+  .block-show-more-btn {
+    width: 150px;
+    color: #9daebb;
+    font-size: 14px;
+    position: relative;
+  }
+  .block-show-more-btn:hover {
+    color: #18c9dd;
+    cursor: pointer;
+  }
+  .block-show-more-content {
+    position: absolute;
+    right: 0;
+  }
+  .latest-block-list {
+    margin: 0 10px;
+    text-align: left;
+    background-color: #fff;
+    .latest-block-list-div {
+      display: block;
+      border: 1px solid #c1e9f1;
+    }
+    .latest-block-list-content {
+      padding: 10px;
+    }
+    .latest-block-list-num {
+      color: #303052;
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+      margin-bottom: 8px;
+    }
+    li {
+      width: 100%;
+      list-style-type: none;
+      border-bottom: 1px solid #e3eef0;
+    }
+    li:nth-last-child(1) {
+      border: 0;
+    }
+  }
+  .latest-block-hash {
+    word-break: break-all;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    font-size: 12px;
+    margin: 10px 0;
+    color: #409eff;
+  }
+  .latest-block-hash:hover {
+    color: #06aaf9;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  .latest-block-time {
+    color: #8a8d90;
+    font-size: 12px;
+  }
+  .latest-block-nodata {
+    color: #cbd4e2;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 27px 0;
+  }
+// 最新交易信息
+.latest-trade {
+  margin: 0 10px;
+}
+.latest-trade-header {
+  height: 22%;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.latest-trade-div {
+  display: flex;
+  align-items: center;
+}
+.latest-trade-title {
+  height: 28px;
+  min-width: 100px;
+  padding: 0px 3px;
+  background: #409eff;
+  border-radius:  0 13px 13px 0;
+  color: #f2f8fc;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+.show-more-trade {
+  width: 150px;
+  color: #9daebb;
+  font-size: 14px;
+  position: relative;
+}
+.show-more-trade:hover {
+  color: #18c9dd;
+  cursor: pointer;
+}
+.show-more-trade-title {
+  position: absolute;
+  right: 0;
+}
+.latest-trade-table {
+  margin-top: 10px;
+  border: 1px solid #c1e9f1;
+}
+.latest-trade-hash {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #6f6868;
+  font-size: 14px;
+  cursor: pointer;
+}
+.latest-trade-hash:hover {
+  color: #06aaf9;
+  font-weight: bold;
+}
+.latest-trade-nodata {
+  color: #cbd4e2;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 27px 0;
+  i {
+    font-size: 50px;
+  }
+}
+// 区块详情
+.block-detail {
+  text-align: center;
+  padding: 0 10px;
+  padding-bottom: 50px;
+}
+.block-detail-title {
+  text-align: left;
+  div {
+    display: inline-block;
+    white-space: normal;
+    word-break: break-all;
+  }
+  .block-detail-title-span {
+    width: 100%;
+    padding: 10px 0;
+    overflow: hidden;
+    font-weight: 600;
+    white-space: nowrap;
+    font-size: 16px;
+    color: #3e3f45;
+    float: left;
+  }
+  .block-detail-title-span:nth-child(2) {
+    color: #18c9dd;
+    font-size: 14px;
+    font-weight: 400;
+    word-break: break-all;
+    white-space: normal;
+    text-align: left;
+  }
+  .block-detail-ul {
+    word-break: keep-all;
+    padding-inline-start: 0px;
+    padding-inline-end: 0px;
+    overflow: hidden;
+    border: 1.8px solid #c1e9f1;
+    border-radius: 8px;
+    background: #ffffff;
+    margin-bottom: 20px;
+    li {
+      display: flex;
+      justify-content: space-between;
+      overflow: hidden;
+      font-size: 14px;
+      line-height: 40px;
+      padding: 0 20px;
+      color: #5f5d5d;
+      border-bottom: 1px solid #e0e8ed;
+    }
+    li:nth-child(3) {
+      border-bottom: 0;
+    }
+  }
+}
+.block-detail-list {
+  line-height: 40px;
+  text-align: center;
+  color: #ffffff;
+  font-size: 16px;
+  background-color: #fff;
+  border: 1px solid #d0eef5;
+}
+.block-detail-list-top {
+  background: linear-gradient(to right, #0ab1f2, #26e0cc);
+}
+.block-detail-list-table-width {
+  width: 1400px;
+  max-width: 1400px;
+}
+.block-detail-parent-hash {
+  color: #636161;
+  font-size: 12px;
+  margin-right: 6px;
+  font-family: PingFangSC-Regular;
+}
+.block-detail-parent-hash:hover {
+  color: #06aaf9;
+  cursor: pointer;
+  margin-right: 6px;
+  font-weight: 600;
+}
+.block-detail-hash {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #6f6868;
+  font-size: 14px;
+  cursor: pointer;
+}
+.block-detail-hash:hover {
+  color: #06aaf9;
+  font-weight: bold;
+}
+// 区块列表
+.blocks {
+  text-align: center;
+  padding: 0 10px;
+  height: 100%;
+  min-height: 600px;
+  .bock-list-data {
+    border: 1px solid #c1e9f1;
+  }
+}
+.mobile-display {
+  display: none;
+}
+.block-div {
+  display: inline-block;
+  line-height: 50px;
+  text-align: left;
+  justify-content: space-between;
+  .block-title {
+    display: flex;
+    align-items: center;
+    margin: 10px 0px;
+    justify-content: left;
+    span {
+      height: 28px;
+      min-width: 100px;
+      padding: 0px 3px;
+      background: #409eff;
+      border-radius:  0 13px 13px 0;
+      color: #f2f8fc;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-align: center;
+      align-items: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+    }
+  }
+}
+.block-list-table-width {
+  width: 1400px;
+  max-width: 1400px;
+}
+.blocks .el-table .cell {
+  .hash-span {
+    color: #07c5f2;
+  }
+  .hash-span:hover {
+    color: #06aaf9;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .block-num-span {
+    color: #6f6868;
+  }
+  .block-hash-span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+  }
+  .block-hash-span:hover {
+    color: #06aaf9;
+    cursor: pointer;
+    font-weight: bold;
+  }
+}
+.blocks .block-header-row-class {
+  color: #3b3f4c;
+  font-size: 14px;
+  height: 40px;
+}
+.blocks .block-row-class:nth-child(odd) {
+  background: #edf5fa;
+  height: 40px;
+}
+// ERC20
+.erc20s {
+  text-align: center;
+  padding: 0 10px;
+  height: 100%;
+  .bock-list-data {
+    border: 1px solid #c1e9f1;
+  }
+}
+.erc20-div {
+  align-items: center;
+  justify-content: space-between;
+  .erc20-title {
+    display: flex;
+    align-items: center;
+    margin: 20px 20px 20px 0px;
+    span {
+      height: 28px;
+      min-width: 100px;
+      padding: 0px 3px;
+      background: #409eff;
+      border-radius:  0 13px 13px 0;
+      color: #f2f8fc;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-align: center;
+      align-items: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+    }
+  }
+}
+.erc20-search {
+  position: relative;
+  margin-bottom: 20px;
+  .el-input {
+    width: calc(100% - 80px);
+  }
+  .el-button {
+    width: 70px;
+  }
+}
+// .erc20-search {
+//   width: auto;
+//   border: 1px solid #409eff;
+//   border-radius: 10px;
+//   margin: 20px 0px;
+//   .el-input {
+//     input {
+//       border: 0px;
+//     border-radius: 20px;
+//     }
+//   }
+//   .el-input-group__append {
+//     border: 0px;
+//     border-radius: 20px;
+//     button{
+//       border: 0px;
+//       border-radius: 20px;
+//       background: #fff;
+//       color: #409eff;
+//     }
+//   }
+// }
+.erc20-table-width {
+  width: 1400px;
+  max-width: 1400px;
+}
+
+.erc20s .el-table .cell {
+  .hash-span {
+    color: #07c5f2;
+  }
+  .hash-span:hover {
+    color: #06aaf9;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .erc20-num-span {
+    color: #6f6868;
+  }
+  .erc20-hash-span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+  }
+  .erc20-hash-span:hover {
+    color: #06aaf9;
+    cursor: pointer;
+    font-weight: bold;
+  }
+}
+.erc20s .erc20-header-row-class {
+  color: #3b3f4c;
+  font-size: 14px;
+  height: 40px;
+}
+.erc20s .erc20-row-class:nth-child(odd) {
+  background: #edf5fa;
+  height: 40px;
+}
+// ERC20详情
+.erc20-detail {
+  text-align: center;
+  padding: 0 10px;
+  padding-bottom: 50px;
+}
+.erc20-detail-title {
+  text-align: left;
+  div {
+    display: inline-block;
+    white-space: normal;
+    word-break: break-all;
+  }
+  .erc20-detail-title-span {
+    width: 25%;
+    padding: 16px 0;
+    overflow: hidden;
+    font-weight: 600;
+    white-space: nowrap;
+    font-size: 16px;
+    color: #3e3f45;
+    float: left;
+  }
+  .erc20-detail-title-span:nth-child(2) {
+    color: #18c9dd;
+    font-size: 14px;
+    font-weight: 400;
+    white-space: nowrap;
+    width: calc(75% - 22px);
+    text-align: right;
+  }
+  .erc20-detail-header {
+    word-break: keep-all;
+    padding-inline-end: 0px;
+    padding-inline-start: 0px;
+    overflow: hidden;
+    border: 1.8px solid #c1e9f1;
+    border-radius: 8px;
+    background: #ffffff;
+    margin: 20px 0px;
+    li {
+      display: flex;
+      justify-content: space-between;
+      overflow: hidden;
+      font-size: 14px;
+      line-height: 40px;
+      padding: 0 20px;
+      color: #5f5d5d;
+      border-bottom: 1px solid #e0e8ed;
+      .erc20-token-detail {
+        width: 50%;
+        margin-right: 20px;
+      }
+    }
+    li:nth-child(3) {
+      border-bottom: 0;
+    }
+  }
+}
+.erc20detail-table-width {
+  width: 800px;
+  max-width: 800px;
+}
+.erc20-detail-list {
+  background-color: #f2f8fc;
+  border: 1px solid #d0eef5;
+}
+.erc20-holder-list {
+  background-color: #f2f8fc;
+  border: 1px solid #d0eef5;
+}
+.erc20-detail-parent-hash {
+  color: #636161;
+  font-size: 12px;
+  margin-right: 6px;
+  font-family: PingFangSC-Regular;
+}
+.erc20-detail-parent-hash:hover {
+  color: #06aaf9;
+  cursor: pointer;
+  margin-right: 6px;
+  font-weight: 600;
+}
+.erc20-detail-hash {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #6f6868;
+  font-size: 14px;
+  cursor: pointer;
+}
+.erc20-detail-hash:hover {
+  color: #06aaf9;
+  font-weight: bold;
+}
+// 交易详情
+.trade-detail {
+  margin: 0 10px;
+}
+.trade_detail_title {
+  height: auto;
+  text-align: left;
+  div {
+    display: inline-block;
+    white-space: normal;
+    word-break: break-all;
+  }
+  .trade_detail_title_span {
+    padding: 16px 0;
+    overflow: hidden;
+    font-weight: 600;
+    word-break: break-all;
+    white-space: normal;
+    font-size: 16px;
+    color: #3e3f45;
+    float: left;
+  }
+  .trade_detail_title_span:nth-child(2) {
+    color: #18c9dd;
+    font-size: 14px;
+    font-weight: 400;
+    white-space: nowrap;
+    width: calc(75% - 22px);
+    text-align: right;
+  }
+}
+.trade-detail-logs {
+  height: auto;
+  text-align: left;
+  margin-right: 5%;
+  div {
+    line-height: 30px;
+    display: inline-block;
+  }
+  .log-index-div {
+    width: 30px;
+    height: 30px;
+    line-height: 30px !important;
+    background: #409eff;
+    color: #fff;
+    text-align: center;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+  }
+  .log-data-div {
+    margin-left: 30px;
+  }
+  .logs-name {
+    font-weight: 600;
+  }
+  .logs-topic-index {
+    width: 25px;
+    height: 25px;
+    line-height: 25px !important;
+    background: #409eff;
+    color: #fff;
+    text-align: center;
+    margin-left: 20px;
+  }
+  .logs-topic-span {
+    margin-left: 35px;
+  }
+}
+.trade_detail_ul {
+  padding-inline-start: 0px;
+  padding-inline-end: 0px;
+  overflow: hidden;
+  border: 1.8px solid #c1e9f1;
+  border-radius: 8px;
+  background: #ffffff;
+  margin-bottom: 20px;
+  word-break: keep-all;
+  li {
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+    font-size: 14px;
+    line-height: 40px;
+    padding: 0 20px;
+    color: #5f5d5d;
+    border-bottom: 1px solid #e0e8ed;
+  }
+  .text-li {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 100%;
+    border-bottom: 0px;
+    .text-div {
+      // width: 95%;
+      margin: 0px 30px 0px 0px;
+    }
+  }
+}
+.trade_from_address {
+  color: #636161;
+  font-size: 12px;
+  font-family: PingFangSC-Regular;
+}
+.trade_from_address:hover {
+  color: #06aaf9;
+  cursor: pointer;
+  font-weight: 600;
+}
+// 交易列表
+.transaction {
+  text-align: left;
+  padding: 0 10px;
+  height: 100%;
+  min-height: 600px;
+  .transaction-list-data {
+    border: 1px solid #c1e9f1;
+  }
+}
+.transaction-list-table-width {
+  width: 1400px;
+  max-width: 1400px;
+}
+.transaction-div {
+  display: inline-block;
+  line-height: 50px;
+  align-items: center;
+  justify-content: space-between;
+  .transaction-title {
+    display: flex;
+    align-items: center;
+    margin: 10px 0px;
+    span {
+      height: 28px;
+      min-width: 100px;
+      padding: 0px 3px;
+      background: #409eff;
+      border-radius:  0 13px 13px 0;
+      color: #f2f8fc;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-align: center;
+      align-items: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+    }
+  }
+}
+.transaction-nodata {
+  margin: 114px 0 159px 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: #bbc7ce;
+}
+
+.transaction .transaction-header-row-class {
+  color: #3b3f4c;
+  font-size: 14px;
+  height: 40px;
+}
+.transaction .transaction-row-class:nth-child(odd) {
+  background: #edf5fa;
+  height: 40px;
+}
+.transaction .transaction-row-class td:nth-child(2) {
+  color: #3b3f4c;
+  font-size: 14px;
+}
+.transaction-hash-span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  cursor: pointer;
+}
+.transaction-hash-span:hover {
+  color: #06aaf9;
+  font-weight: bold;
+}
+// 钱包详情
+.wallet-detail {
+  text-align: left;
+  padding: 0 10px;
+  padding-bottom: 50px;
+  .trade-list-search {
+    line-height: 50px;
+    width: 100%;
+    font-size: 16px;
+    .el-input {
+      width: 200px;
+    }
+  }
+  .wallet-table-width {
+    width: 1400px;
+    max-width: 1400px;
+  }
+  .wallet-clipboard {
+    width: 10px;
+    margin-left: 10px;
+  }
+  .wallet-detail-click-span {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12px;
+  }
+  .wallet-detail-click-span:hover {
+    color: #06aaf9;
+    cursor: pointer;
+    font-weight: bold;
+  }
+}
+.wallet-detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 15px;
+  color: #3e3f45;
+  height: auto;
+  text-align: left;
+  div {
+    display: inline-block;
+    white-space: normal;
+    word-break: break-all;
+  }
+  .wallet-detail-header_span {
+    padding: 16px 0;
+    overflow: hidden;
+    font-weight: 600;
+    word-break: break-all;
+    white-space: normal;
+    font-size: 16px;
+    color: #3e3f45;
+    float: left;
+  }
+}

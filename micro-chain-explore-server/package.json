@@ -1,0 +1,46 @@
+{
+  "name": "micro-chain-explore-server",
+  "private": true,
+  "version": "0.0.0",
+  "description": "a Sails application",
+  "keywords": [],
+  "dependencies": {
+    "@sailshq/lodash": "^3.10.3",
+    "abi-decoder": "^2.2.2",
+    "bignumber.js": "^9.0.0",
+    "chain3": "^0.1.22",
+    "dateformat": "^2.0.0",
+    "decimal.js": "^10.2.0",
+    "grunt": "1.0.4",
+    "liberum-utils": "^1.0.3",
+    "mongodb": "^3.4.1",
+    "sails": "^1.2.3",
+    "sails-hook-grunt": "^4.0.0",
+    "sails-hook-orm": "^2.1.1",
+    "sails-hook-sockets": "^2.0.0",
+    "sails-mongo": "^1.0.1",
+    "shelljs": "^0.8.3",
+    "winston": "^2.3.1",
+    "winston-daily-rotate-file": "^1.4.6"
+  },
+  "devDependencies": {
+    "eslint": "5.16.0"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "test": "npm run lint && npm run custom-tests && echo 'Done.'",
+    "lint": "./node_modules/eslint/bin/eslint.js . --max-warnings=0 --report-unused-disable-directives && echo '✔  Your .js files look good.'",
+    "custom-tests": "echo \"(No other custom tests yet.)\" && echo",
+    "sync": "sails run sync-micro-chain"
+  },
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/zczhang/micro-chain-explore.git"
+  },
+  "author": "zczhang",
+  "license": "",
+  "engines": {
+    "node": "^8.11"
+  }
+}
