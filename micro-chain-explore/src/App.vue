@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :class="isMobile?'mobileCss':'pcCss'">
     <IHeader></IHeader>
     <router-view />
     <IFooter></IFooter>
@@ -11,9 +11,14 @@ import IHeader from "./components/IHeader";
 import IFooter from "./components/IFooter";
 export default {
   name: "App",
-   components: {
+  components: {
     IHeader,
     IFooter
+  },
+  data() {
+    return {
+      isMobile: false
+    };
   },
   created() {
     if (
@@ -23,9 +28,11 @@ export default {
     ) {
       // 移动端CSS
       require("./css/mobile.scss");
+      this.isMobile = true;
     } else {
       // PC端CSS
       require("./css/pc.scss");
+      this.isMobile = false;
     }
   }
 };
