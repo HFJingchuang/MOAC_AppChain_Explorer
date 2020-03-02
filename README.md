@@ -1,3 +1,16 @@
+# micro-chain-explore
+MOAC应用链浏览器
+1. 安装
+> npm install
+2. 启动
+> npm run start
+3. 配置
+> 开发环境: micro-chain-explore\micro-chain-explore\config\dev.env.js
+
+> 生产环境: micro-chain-explore\micro-chain-explore\config\prod.env.js
+
+数据请求配置: BASE_URL:'"http://118.31.45.5/api"'
+
 # micro-chain-explore-server
 服务提供MOAC应用链数据同步，区块、交易、钱包相关数据查询
 
@@ -30,23 +43,13 @@
 存在则执行 node createMongoIndex 添加索引
 
 3.启动服务
-> npm run start
-
-### micro-chain-explore
-MOAC应用链浏览器
-1. 安装
-> npm install
-2. 启动
-> npm run start
-3. 配置
-> 开发环境: micro-chain-explore\micro-chain-explore\config\dev.env.js
-
-> 生产环境: micro-chain-explore\micro-chain-explore\config\prod.env.js
-
-数据请求配置: BASE_URL:'"http://118.31.45.5/api"'
-
+> npm run start //开发环境
+> 
+> npm run startpro //生产环境
 ### custom配置说明
 ```
+./config/custom.js
+
 microChain：应用链地址
 dappBase：dappBase地址
 vnodeUri：Vnode URI
