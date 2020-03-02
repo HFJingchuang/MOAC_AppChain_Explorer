@@ -11,6 +11,8 @@ MOAC应用链浏览器
 
 数据请求配置: BASE_URL:'"http://118.31.45.5/api"'
 
+### [测试浏览器链接](http://explorer.zcold.top)
+
 # micro-chain-explore-server
 服务提供MOAC应用链数据同步，区块、交易、钱包相关数据查询
 
