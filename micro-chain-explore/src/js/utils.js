@@ -1,4 +1,4 @@
-import { getIsERC20, getERC20Info } from './request'
+import { getERC20Info } from './request'
 const abiDecoder = require('abi-decoder');
 const Chain3 = require('chain3');
 const BigNumber = require('bignumber.js');
@@ -11,6 +11,8 @@ chain3.setScsProvider(new Chain3.providers.HttpProvider(process.env.SCS_URI));
 var mcObject = chain3.microchain();
 mcObject.setVnodeAddress(process.env.VIA);
 var dappBase = mcObject.getDapp(process.env.MICRO_CHAIN, process.env.DAPP_BASE_ABI, process.env.DAPP_BASE_ADDR);
+
+abiDecoder.addABI(process.env.ERC20_ABI);
 
 export const formatTime = (t) => {
     let unixtime = t * 1000;
@@ -69,32 +71,41 @@ export const decodeInput = async (input, to, flag) => {
             encode = '0x' + input.slice(42);
         } else {
             encode = '0x' + input.slice(42);
-            abiDecoder.addABI(JSON.parse(dappBase.getDappABI(to)));
             let abi = dappBase.getDappABI(to);
             if (abi) {
                 abiDecoder.addABI(JSON.parse(abi));
-            } else {
-                let res = await getIsERC20(to);
-                if (res && res.data) {
-                    abiDecoder.addABI(JSON.parse(process.env.ERC20_ABI));
-                } else {
-                    return
-                }
             }
         }
         let decodedData = abiDecoder.decodeMethod(encode);
-        let decode = 'Function:' + decodedData['name'] + '\n';
-        let params = decodedData['params'];
-        let length = params.length;
-        for (var i = 0; i < length; i++) {
-            decode = decode + params[i]['name'] + ":" + params[i]['value'] + '\n'
+        if (decodedData) {
+            let functionName = decodedData['name'];
+            let decode = 'Function:' + functionName + '\n';
+
+            let functionCall = { type: 'function' };
+            functionCall['name'] = functionName;
+            let inputs = [];
+            let values = [];
+            let params = decodedData['params'];
+            for (var i = 0, length = params.length; i < length; i++) {
+                let name = params[i]['name'];
+                let type = params[i]['type'];
+                let value = params[i]['value'];
+                inputs.push({
+                    name: name,
+                    type: type
+                })
+                values.push(value)
+                decode = decode + name + ":" + value + '\n'
+            }
+            functionCall['inputs'] = inputs;
+            let callCode = Web3EthAbi.encodeFunctionCall(functionCall, values);
+            let functionLength = callCode.length;
+            if (encode.length > functionLength) {
+                let memo = Buffer.from(encode.slice(functionLength), 'hex').toString();
+                return { decode: decode, memo: memo };
+            }
+            return { decode: decode };
         }
-        let functionLength = new BigNumber(length).times(64).plus(10).toNumber();
-        if (encode.length > functionLength) {
-            let memo = Buffer.from(encode.slice(functionLength), 'hex').toString();
-            return { decode: decode, memo: memo };
-        }
-        return { decode: decode };
     } catch (error) {
         console.log(error)
     }
