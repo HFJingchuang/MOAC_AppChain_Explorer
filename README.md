@@ -9,7 +9,7 @@ MOAC应用链浏览器
 
 > 生产环境: micro-chain-explore\micro-chain-explore\config\prod.env.js
 
-数据请求配置: BASE_URL:'"http://118.31.45.5/api"'
+数据请求配置: BASE_URL:'"http://explorer.zcold.top"'
 
 ### [测试浏览器链接](http://explorer.zcold.top)
 
@@ -19,37 +19,22 @@ MOAC应用链浏览器
 ### 准备工作
 安装Node、npm<br>
 
+> npm install
+
 安装sails
 > npm install sails -g
 
 安装MongoDB 3.6及以上版本
 
+### custom配置说明
+
 >在micro-chain-explore\micro-chain-explore-server\config\datastores.js中配置DB连接
 
-需在micro-chain-explore\micro-chain-explore-server\config\custom.js中配置MOAC应用链参数
+>在micro-chain-explore\micro-chain-explore-server\config\custom.js中配置相关参数(开发环境)
 
-> npm install
+>需在micro-chain-explore\micro-chain-explore-server\config\env\production.js中配置相关参数（生产环境）
 
-### 启动
-
-1.开始同步数据
-
-同步命令
-> sails run sync-micro-chain
-或者
-> node sync.js
-
-2.添加索引
-
->同步数据时，查看数据库Blocks、ERC20、Transactions、Wallet表是否创建，
-存在则执行 node createMongoIndex 添加索引
-
-3.启动服务
-> npm run start //开发环境
-> 
-> npm run startpro //生产环境
-### custom配置说明
-```
+```json
 ./config/custom.js
 
 microChain：应用链地址
@@ -62,6 +47,25 @@ DAPP_BASE_ABI：dappBase合约ABI
 ASM_MICRO_CHAIN_ABI：应用链合约ABI
 TRANSFER_SHA：Transfer事件sha3值(固定值，无需变更)
 ```
+
+### 启动
+
+1.开始同步数据
+
+同步命令
+> sails run sync-micro-chain
+或者
+> ./start.sh
+
+2.添加索引
+
+>同步数据时，查看数据库Blocks、ERC20、Transactions、Wallet表是否创建，
+存在则执行 node createMongoIndex 添加索引
+
+3.启动服务
+> npm run start //开发环境
+> 
+> npm run startpro //生产环境
 
 ### router说明
 
