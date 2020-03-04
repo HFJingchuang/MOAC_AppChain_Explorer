@@ -85,7 +85,9 @@
                 </div>
               </li>
               <li class="text-li">
-                <span style="font-weight:600;width: 5%;margin-right:10px">{{this.$t("message.txInput")}}</span>
+                <span
+                  style="font-weight:600;width: 5%;margin-right:10px"
+                >{{this.$t("message.txInput")}}</span>
                 <div class="text-div">
                   <el-input type="textarea" rows="4" readonly v-model="decodeInputData"></el-input>
                   <el-button
@@ -225,10 +227,12 @@ export default {
           this.tradeDetail.sharding_flag,
           this
         );
-        this.decodeInputData = !decode.decode
-          ? this.tradeDetail.input
-          : decode.decode;
-        this.decodeMemo = decode.memo;
+        if (!decode || !decode.decode) {
+          this.decodeInputData = this.tradeDetail.input;
+        } else {
+          this.decodeInputData = decode.decode;
+          this.decodeMemo = decode.memo;
+        }
       } else {
         this.decodeStatus = false;
         this.decodeMemo = "";

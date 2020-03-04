@@ -1,6 +1,11 @@
 <template>
   <div class="search-box">
-    <el-input size="medium" v-model="addressOrHash" :placeholder="$t('message.search')"></el-input>
+    <el-input
+      size="medium"
+      v-model="addressOrHash"
+      @keyup.enter.native="search"
+      :placeholder="$t('message.search')"
+    ></el-input>
     <el-button type="primary" size="medium" icon="el-icon-search" @click="search"></el-button>
   </div>
 </template>
@@ -18,6 +23,9 @@ export default {
   },
   methods: {
     async search() {
+      if (!this.addressOrHash) {
+        return;
+      }
       let isAddress = chain3.isAddress(this.addressOrHash);
       if (isAddress) {
         let url =
