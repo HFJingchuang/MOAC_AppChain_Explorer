@@ -1,8 +1,10 @@
 {
     "lan": "EN",
-    "lan2":"English",
+    "lan2": "English",
     "home": "HomePage",
     "copy": "Replicating Success",
+    "copy_success": "Replicating Success",
+    "copy_fail": "Replicating Failed",
     "title": "JingChuang MOAC APPChain Explorer",
     "ERC": "Token",
     "footer": "JingChuang MOAC APPChain Explorer | Hefei Jingchuang Digital Technology Co., Ltd",

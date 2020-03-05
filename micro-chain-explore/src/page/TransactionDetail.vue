@@ -200,7 +200,11 @@ export default {
       this.logsEvent = res.logs;
     },
     copyTextToClipboard(text) {
-      this.$refs.clipboard.copyToClipboard(text);
+      if (Array.isArray(this.$refs.clipboard)) {
+        this.$refs.clipboard[0].copyToClipboard(text);
+      } else {
+        this.$refs.clipboard.copyToClipboard(text);
+      }
     },
     jumpBlockDetail(block) {
       let url = window.location.origin + `/#/blockDetail/?blockNum=${block}`;

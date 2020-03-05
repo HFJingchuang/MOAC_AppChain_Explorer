@@ -8,21 +8,35 @@ import Clipboard from "clipboard";
 export default {
   name: "BlockDetail",
   data() {
-    return {};
+    return { clipboard: null };
+  },
+  destroyed() {
+    this.clipboard.destroy();
   },
   methods: {
     copyToClipboard(copyText) {
-      var clipboard = new Clipboard(".el-icon-document-copy", {
+      if (this.clipboard && JSON.stringify(this.clipboard.text()) !== "{}") {
+        this.clipboard.destroy();
+      }
+      var _this = this;
+      this.clipboard = new Clipboard(".el-icon-document-copy", {
         text: () => {
           return copyText;
         }
       });
-      clipboard.on("success", function(e) {
+      this.clipboard.on("success", function(e) {
+        _this.$message({
+          message: _this.$t("message.copy_success"),
+          type: "success"
+        });
         e.clearSelection();
       });
-      this.$message({
-        message: this.$t("message.copy"),
-        type: "success"
+      this.clipboard.on("error", function(e) {
+        _this.$message({
+          message: _this.$t("message.copy_fail"),
+          type: "error"
+        });
+        e.clearSelection();
       });
     }
   }
