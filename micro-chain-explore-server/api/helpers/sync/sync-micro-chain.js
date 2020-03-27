@@ -47,7 +47,7 @@ module.exports = {
             for (var i = 0, length = txs.length; i < length; i++) {
               let isSync = await Transactions.count({ transaction_hash: txs[i] })
               if (isSync == 0) {
-                let receipt = Utils.getReceiptByHash(txs[i]);
+                let receipt =await Utils.getReceiptByHash(txs[i]);
                 let tx = await Utils.getTransaction(txs[i]);
                 let contractAddress;// 部署合约地址
                 let status;// 交易是否成功
