@@ -12,7 +12,7 @@ module.exports = {
   fn: async function () {
     try {
       let blockNumToDB = await sails.helpers.getDbSynchronousBlockNumber();
-      let blockNum = await sails.helpers.getBlockNumber();
+      let blockNum = await Utils.getBlockNumer();
       sails.log.info("blockNumToDB", blockNumToDB)
       sails.log.info("blockNum", blockNum)
       await Blocks.destroy({ number: blockNumToDB })
@@ -23,7 +23,7 @@ module.exports = {
       }
       if (blockNumToDB < blockNum) {
         for (blockNumToDB; blockNumToDB <= blockNum; blockNumToDB++) {
-          let info = await sails.helpers.getBlocks(blockNumToDB);
+          let info = await Utils.getBlocks(blockNumToDB);
           let transactions = info.transactions;
           let block = {
             extra_data: info.extraData,
@@ -47,8 +47,8 @@ module.exports = {
             for (var i = 0, length = txs.length; i < length; i++) {
               let isSync = await Transactions.count({ transaction_hash: txs[i] })
               if (isSync == 0) {
-                let receipt = Utils.chain3.scs.getReceiptByHash(sails.config.custom.microChain, txs[i]);
-                let tx = await sails.helpers.getTransaction(txs[i]);
+                let receipt = Utils.getReceiptByHash(txs[i]);
+                let tx = await Utils.getTransaction(txs[i]);
                 let contractAddress;// 部署合约地址
                 let status;// 交易是否成功
                 let logs = [];// 交易日志

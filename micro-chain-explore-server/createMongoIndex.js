@@ -4,43 +4,54 @@ var dbName = "JingChuang";
 var indexData = [
     {
         tableName: 'blocks', // 表名
-        indexName: 'number', // 创建索引字段名称
-        indexType: 1 // 1:asc,-1:desc
-    },
-    {
-        tableName: 'blocks', // 表名
-        indexName: 'block_hash', // 创建索引字段名称
-        indexType: 1 // 1:asc,-1:desc
-    },
-    {
-        tableName: 'wallet',
-        indexName: 'address',
-        indexType: 1
-    },
-    {
-        tableName: 'wallet',
-        indexName: 'token',
-        indexType: 1
-    },
-    {
-        tableName: 'transactions',
-        indexName: 'createdAt',
-        indexType: 1
-    },
-    {
-        tableName: 'transactions',
-        indexName: 'transaction_hash',
-        indexType: 1
+        index: [{
+            block_hash: -1,
+            createdAt: -1
+        }, {
+            number: -1,
+            timestamp: -1
+        }]
+        // 1:asc,-1:desc
     },
     {
         tableName: 'erc20',
-        indexName: 'erc20',
-        indexType: 1
+        index: [{
+            erc20: -1
+        }, {
+            token: -1,
+            balance: -1
+        }
+        ]
+    },
+    {
+        tableName: 'transactions',
+        index: [{
+            transaction_hash: -1
+        }]
+    },
+    {
+        tableName: 'deposit',
+        index: [{
+            createdAt: -1
+        }]
+
+    },
+    {
+        tableName: 'token',
+        index: [{
+            address: -1,
+            symbol: -1
+        }]
+
     }
 ]
 
 for (let i = 0, len = indexData.length; i < len; i++) {
-    createMongoIndex(indexData[i].tableName, indexData[i].indexName, indexData[i].indexType)
+    let index = indexData[i].index;
+    for (let j = 0, len = index.length; j < len; j++) {
+        createMongoIndex(indexData[i].tableName, index[j])
+    }
+
 }
 
 // importData()

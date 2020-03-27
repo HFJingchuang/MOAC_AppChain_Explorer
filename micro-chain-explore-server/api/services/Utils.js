@@ -3,6 +3,8 @@ const BigNumber = require('bignumber.js')
 const abiDecoder = require('abi-decoder');
 const request = require('request');
 const Web3EthAbi = require('web3-eth-abi');
+const axios = require("axios");
+var fetch = axios.create({ headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' } });
 
 abiDecoder.addABI(JSON.parse(sails.config.custom.ASM_MICRO_CHAIN_ABI));
 abiDecoder.addABI(JSON.parse(sails.config.custom.DAPP_BASE_ABI));
@@ -119,4 +121,28 @@ exports.getBalance = async (address, token, decimals) => {
             resolve();
         });
     })
+}
+
+exports.getReceiptByHash = async function (txHash) {
+    let params = JSON.stringify({ "jsonrpc": "2.0", "method": "scs_getReceiptByHash", "params": [sails.config.custom.microChain, txHash], "id": 101 })
+    let response = await fetch.post(sails.config.custom.scsUri, params);
+    return response.data.result;
+}
+
+exports.getTransaction = async function (txHash) {
+    let params = JSON.stringify({ "jsonrpc": "2.0", "method": "scs_getTransactionByHash", "params": [sails.config.custom.microChain, txHash], "id": 101 })
+    let response = await fetch.post(sails.config.custom.scsUri, params);
+    return response.data.result;
+}
+
+exports.getBlocks = async function (blockNum) {
+    let params = JSON.stringify({ "jsonrpc": "2.0", "method": "scs_getBlock", "params": [sails.config.custom.microChain, chain3.toHex(blockNum)], "id": 101 })
+    let response = await fetch.post(sails.config.custom.scsUri, params);
+    return response.data.result;
+}
+
+exports.getBlockNumer = async function () {
+    let params = JSON.stringify({ "jsonrpc": "2.0", "method": "scs_getBlockNumber", "params": [sails.config.custom.microChain], "id": 101 })
+    let response = await fetch.post(sails.config.custom.scsUri, params);
+    return chain3.toDecimal(response.data.result);
 }

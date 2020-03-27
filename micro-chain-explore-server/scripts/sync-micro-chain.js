@@ -6,7 +6,7 @@ module.exports = {
     while (true) {
       sails.log.info(new Date().toLocaleTimeString(), 'Sync')
       await sails.helpers.sync.syncMicroChain();
-      await new Promise(resolve => setTimeout(resolve, 10000));
+      await new Promise(resolve => setTimeout(resolve, 5000));
     }
   },
 };

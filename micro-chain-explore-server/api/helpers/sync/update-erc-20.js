@@ -15,7 +15,7 @@ module.exports = {
       for (var i = 0, length = transactions.length; i < length; i++) {
         // 交易是否成功
         let hash = transactions[i].transaction_hash;
-        let receipt = Utils.chain3.scs.getReceiptByHash(sails.config.custom.microChain, hash);
+        let receipt = await Utils.getTransaction(hash);
         let tx = await sails.helpers.getTransaction(hash)
         let contractAddress = receipt.contractAddress;
         if (contractAddress && contractAddress !== '0x0000000000000000000000000000000000000000') {
