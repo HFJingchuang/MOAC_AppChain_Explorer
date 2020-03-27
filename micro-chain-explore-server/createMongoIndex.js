@@ -57,13 +57,11 @@ for (let i = 0, len = indexData.length; i < len; i++) {
 // importData()
 return
 
-function createMongoIndex(tableName, indexName, indexType) {
+function createMongoIndex(tableName, index) {
     MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, db) {
-        var indexStr = {};
-        indexStr[indexName] = indexType;
         if (err) throw err;
         var dbo = db.db(dbName);
-        dbo.collection(tableName).createIndex(indexStr,
+        dbo.collection(tableName).createIndex(index,
             null,
             function (err, results) {
                 if (err)
