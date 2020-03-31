@@ -26,36 +26,41 @@ module.exports = {
   },
 
   fn: async function ({ isLatest, page, seq, tradeStart, tradeEnd }) {
-    let transactionsList;
-    let count;
-    if (isLatest) {
-      transactionsList = await Transactions.find({
-        select: ['block_number', 'transaction_hash', 'sharding_flag', 'status', 'time']
-      })
-        .sort([{ createdAt: 'DESC' }])
-        .skip(0).limit(6);
-      count = 6;
-    } else {
-      let sql = { time: {} }
-      if (tradeStart) {
-        sql["time"][">="] = tradeStart
+    try {
+      if (seq > 500) {
+        seq = 500
       }
-      if (tradeEnd) {
-        sql["time"]["<"] = tradeEnd
+      let transactionsList;
+      let count;
+      if (isLatest) {
+        transactionsList = await Transactions.find({
+          select: ['block_number', 'transaction_hash', 'sharding_flag', 'status', 'time']
+        })
+          .sort([{ createdAt: 'DESC' }])
+          .skip(0).limit(6);
+        count = 6;
+      } else {
+        let sql = { time: {} }
+        if (tradeStart) {
+          sql["time"][">="] = tradeStart
+        }
+        if (tradeEnd) {
+          sql["time"]["<"] = tradeEnd
+        }
+        if (!tradeStart && !tradeEnd) {
+          sql = {}
+        }
+        transactionsList = await Transactions.find({
+          select: ['block_number', 'transaction_hash', 'sharding_flag', 'status', 'time']
+        })
+          .where(sql)
+          .sort([{ createdAt: 'DESC' }])
+          .skip((page - 1) * seq).limit(seq)
+        count = await Transactions.count(sql);
       }
-      if (!tradeStart && !tradeEnd) {
-        sql = {}
-      }
-      transactionsList = await Transactions.find({
-        select: ['block_number', 'transaction_hash', 'sharding_flag', 'status', 'time']
-      })
-        .where(sql)
-        .sort([{ createdAt: 'DESC' }])
-        .skip((page - 1) * seq).limit(seq)
-      count = await Transactions.count(sql);
+      return Utils._return(ResultCode.OK_GET_TRADE_LIST, { data: transactionsList, count: count });
+    } catch (error) {
+      return this.res.serverError(error);
     }
-    return Utils._return(ResultCode.OK_GET_TRADE_LIST, { data: transactionsList, count: count });
-
   }
-
 };

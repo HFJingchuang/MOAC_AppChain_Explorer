@@ -5,18 +5,28 @@ var indexData = [
     {
         tableName: 'blocks', // 表名
         index: [{
-            block_hash: -1,
+            hash: -1,
             createdAt: -1
         }, {
-            number: -1,
             timestamp: -1
+        }, {
+            number: -1
+        }, {
+            transactions_length: 1
         }]
         // 1:asc,-1:desc
     },
     {
         tableName: 'erc20',
         index: [{
-            erc20: -1
+            erc20: -1,
+            createdAt: -1
+        }, {
+            name: -1,
+            createdAt: -1
+        }, {
+            symbol: -1,
+            createdAt: -1
         }, {
             token: -1,
             balance: -1
@@ -26,7 +36,21 @@ var indexData = [
     {
         tableName: 'transactions',
         index: [{
+            block_hash: -1
+        }, {
             transaction_hash: -1
+        }, {
+            time: -1,
+            createdAt: -1
+        }, {
+            to: -1,
+            createdAt: -1
+        }, {
+            createdAt: -1
+        }, {
+            from: -1,
+            to: -1,
+            time: -1
         }]
     },
     {
@@ -37,10 +61,11 @@ var indexData = [
 
     },
     {
-        tableName: 'token',
+        tableName: 'wallet',
         index: [{
             address: -1,
-            symbol: -1
+            balance: -1,
+            createdAt: -1
         }]
 
     }

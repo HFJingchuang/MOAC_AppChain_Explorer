@@ -30,6 +30,9 @@ module.exports = {
 
   fn: async function ({ address, tradePartner, tradeStart, tradeEnd, page, seq }) {
     try {
+      if (seq > 500) {
+        seq = 500
+      }
       let trade = []
       let count;
       let sql = { or: [{ from: address }, { to: address }] }

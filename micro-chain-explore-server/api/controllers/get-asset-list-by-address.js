@@ -21,6 +21,9 @@ module.exports = {
 
     fn: async function ({ address, page, seq }) {
         try {
+            if (seq > 500) {
+                seq = 500
+            }
             let count = await Wallet.count({ address: address, balance: { ">": 0 } })
             let assetList = await Wallet.find({ address: address, balance: { ">": 0 } })
                 .sort([{ createdAt: 'DESC' }]).skip((page - 1) * seq).limit(seq)

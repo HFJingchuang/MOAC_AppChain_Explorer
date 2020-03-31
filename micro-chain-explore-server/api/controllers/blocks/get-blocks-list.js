@@ -27,6 +27,9 @@ module.exports = {
 
   fn: async function ({ isLatest, page, seq, blockStart, blockEnd }) {
     try {
+      if (seq > 500) {
+        seq = 500
+      }
       let blocksList;
       let count;
       if (isLatest) {
@@ -47,7 +50,7 @@ module.exports = {
         }
         blocksList = await Blocks.find()
           .where(sql)
-          .sort([{ number: 'DESC' }])
+          .sort([{ timestamp: 'DESC' }])
           .skip((page - 1) * seq).limit(seq)
         count = await Blocks.count(sql)
       }
