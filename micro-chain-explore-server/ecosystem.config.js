@@ -1,6 +1,6 @@
 module.exports = {
   apps : [{
-    name: 'Order',
+    name: 'Explorer',
     script: 'app.js',
 
     // Options reference: https://pm2.keymetrics.io/docs/usage/application-declaration/
@@ -11,7 +11,7 @@ module.exports = {
     watch: false,
     max_memory_restart: '1G',
     env: {
-      NODE_ENV: 'development'
+      NODE_ENV: 'production'
     },
     // env_production: {
     //  NODE_ENV: 'production'

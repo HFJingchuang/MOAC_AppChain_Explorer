@@ -31,11 +31,7 @@ module.exports = {
             })
                 .sort([{ createdAt: 'DESC' }])
                 .skip((page - 1) * seq).limit(seq);
-            let start1 = new Date().getTime()
-            console.log(start1 - start)
             let tradeCount = await Transactions.count({ to: tokenAddress })
-            let start2 = new Date().getTime()
-            console.log(start2 - start1)
             return Utils._return(ResultCode.OK_GET_ERC20_TRADE_LIST, { data: tradeList, count: tradeCount });
         } catch (error) {
             return this.res.serverError(error);
