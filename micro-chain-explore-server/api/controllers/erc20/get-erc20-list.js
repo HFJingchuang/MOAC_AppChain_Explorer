@@ -24,6 +24,9 @@ module.exports = {
       if (seq > 500) {
         seq = 500
       }
+      if (!condition) {
+        condition = ""
+      }
       let erc20List = await ERC20.find()
         .where({ or: [{ erc20: { contains: condition } }, { name: { contains: condition } }, { symbol: { contains: condition } }] })
         .sort([{ createdAt: 'DESC' }])
