@@ -12,8 +12,7 @@
 
 <script>
 import { getHashType } from "../js/request";
-var Chain3 = require("chain3");
-var chain3 = new Chain3();
+import { chain3 } from "../js/utils";
 export default {
   name: "SearchBox",
   data() {

@@ -242,9 +242,7 @@
 import Clipboard from "../components/CopyToClipboard";
 import Pagination from "../components/Pagination";
 import { getTradeListByAddress, getAssetListByAddress } from "../js/request";
-import { formatStatus, formatShadingFlag } from "../js/utils";
-var Chain3 = require("chain3");
-var chain3 = new Chain3();
+import { formatStatus, formatShadingFlag, chain3 } from "../js/utils";
 export default {
   name: "WalletDetail",
   components: {

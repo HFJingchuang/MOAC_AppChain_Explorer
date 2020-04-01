@@ -1,12 +1,15 @@
 import { getERC20Info } from './request'
 const abiDecoder = require('abi-decoder');
-const Chain3 = require('chain3');
+const chain3 = require('../../node_modules/chain3/lib//utils/utils');
+const _sha3 = require('../../node_modules/chain3/lib/utils/sha3');
 const BigNumber = require('bignumber.js');
 const Web3EthAbi = require('web3-eth-abi');
 const axios = window.axios.create({ headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' } });
-
-var chain3 = new Chain3();
 abiDecoder.addABI(process.env.ERC20_ABI);
+
+const sha3 = function (string, options) {
+    return '0x' + _sha3(string, options);
+};
 
 export const formatTime = (t) => {
     let unixtime = t * 1000;
@@ -161,7 +164,7 @@ export const browser = {
 
 export const getTotalSupply = async (token, decimals) => {
     return new Promise((resolve, reject) => {
-        let data = chain3.sha3('totalSupply()').substr(0, 10);
+        let data = sha3('totalSupply()').substr(0, 10);
         let params = JSON.stringify({ "jsonrpc": "2.0", "method": "scs_directCall", "params": [{ "to": process.env.MICRO_CHAIN, "dappAddr": token, "data": data }], "id": Math.floor((Math.random() * 100) + 1) })
         axios.post(process.env.SCS_URI, params).then(function (response) {
             let res = Web3EthAbi.decodeParameter('uint256', response.data.result);
