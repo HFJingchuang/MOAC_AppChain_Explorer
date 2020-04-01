@@ -14,7 +14,7 @@ module.exports = {
     fn: async function () {
         return new Promise(function (resolve, reject) {
             try {
-                let dapps = Utils.chain3.scs.getDappAddrList(sails.config.custom.microChain)
+                let dapps = Utils.getDappAddrList()
                 resolve(dapps)
             } catch (e) {
                 reject(e)

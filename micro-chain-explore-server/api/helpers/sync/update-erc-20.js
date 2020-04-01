@@ -19,7 +19,7 @@ module.exports = {
         let tx = await sails.helpers.getTransaction(hash)
         let contractAddress = receipt.contractAddress;
         if (contractAddress && contractAddress !== '0x0000000000000000000000000000000000000000') {
-          let res = Utils.isERC20(contractAddress)
+          let res = await Utils.isERC20(contractAddress)
           if (res) {
             let erc20 = {
               erc20: contractAddress,

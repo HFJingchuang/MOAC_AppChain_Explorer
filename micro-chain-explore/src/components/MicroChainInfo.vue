@@ -112,7 +112,7 @@
 </template>
 <script>
 import { getMicroChainInfo } from "../js/request";
-import { chain3 } from "../js/utils";
+import { getTotalOperation, getFlushStatus } from "../js/utils";
 export default {
   name: "MicroChainInfo",
   data() {
@@ -158,17 +158,8 @@ export default {
       this.microChainInfo = res;
       this.SCSList = this.microChainInfo.scsList;
       this.scsValue = this.SCSList[0];
-      this.getBalance();
-    },
-    getBalance() {
-      var subchainbaseContract = chain3.mc.contract(
-        process.env.ASM_MICRO_CHAIN_ABI
-      );
-      let subChain = subchainbaseContract.at(process.env.MICRO_CHAIN);
-      this.totalOperation = chain3
-        .fromSha(subChain.totalOperation())
-        .toString();
-      this.status = subChain.getFlushStatus();
+      this.totalOperation = await getTotalOperation();
+      this.status = await getFlushStatus();
     }
   }
 };

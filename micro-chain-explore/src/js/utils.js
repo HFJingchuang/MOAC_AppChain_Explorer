@@ -5,13 +5,7 @@ const BigNumber = require('bignumber.js');
 const Web3EthAbi = require('web3-eth-abi');
 const axios = window.axios.create({ headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' } });
 
-var chain3 = new Chain3(new Chain3.providers.HttpProvider(process.env.VNODE_URI));
-chain3.setScsProvider(new Chain3.providers.HttpProvider(process.env.SCS_URI));
-
-var mcObject = chain3.microchain();
-mcObject.setVnodeAddress(process.env.VIA);
-var dappBase = mcObject.getDapp(process.env.MICRO_CHAIN, process.env.DAPP_BASE_ABI, process.env.DAPP_BASE_ADDR);
-
+var chain3 = new Chain3();
 abiDecoder.addABI(process.env.ERC20_ABI);
 
 export const formatTime = (t) => {
@@ -40,18 +34,17 @@ export const formatTime = (t) => {
 };
 
 export const formatDate = (t) => {
-    let unixtime = t * 1000;
-    let unixTimestamp = new Date(unixtime);
-    let H = unixTimestamp.getHours();
-    let mm = unixTimestamp.getMinutes();
-    let ss = unixTimestamp.getSeconds();
-    if (mm < 10) {
-        mm = '0' + mm;
-    }
-    if (ss < 10) {
-        ss = '0' + ss;
-    }
-    let toDay = H + ':' + mm + ":" + ss;
+    let unixTimestamp = new Date(t);
+    let Y = unixTimestamp.getFullYear();
+    let M =
+        unixTimestamp.getMonth() + 1 >= 10
+            ? unixTimestamp.getMonth() + 1
+            : '0' + (unixTimestamp.getMonth() + 1);
+    let D =
+        unixTimestamp.getDate() >= 10
+            ? unixTimestamp.getDate()
+            : '0' + unixTimestamp.getDate();
+    let toDay = Y + '-' + M + '-' + D;
     return toDay;
 };
 
@@ -71,7 +64,7 @@ export const decodeInput = async (input, to, flag) => {
             encode = '0x' + input.slice(42);
         } else {
             encode = '0x' + input.slice(42);
-            let abi = dappBase.getDappABI(to);
+            let abi = await getDappABI(to);
             if (abi) {
                 abiDecoder.addABI(JSON.parse(abi));
             }
@@ -169,11 +162,48 @@ export const browser = {
 export const getTotalSupply = async (token, decimals) => {
     return new Promise((resolve, reject) => {
         let data = chain3.sha3('totalSupply()').substr(0, 10);
-        let params = JSON.stringify({ "jsonrpc": "2.0", "method": "scs_directCall", "params": [{ "to": process.env.MICRO_CHAIN, "dappAddr": token, "data": data }], "id": 101 })
+        let params = JSON.stringify({ "jsonrpc": "2.0", "method": "scs_directCall", "params": [{ "to": process.env.MICRO_CHAIN, "dappAddr": token, "data": data }], "id": Math.floor((Math.random() * 100) + 1) })
         axios.post(process.env.SCS_URI, params).then(function (response) {
             let res = Web3EthAbi.decodeParameter('uint256', response.data.result);
             let totalSupply = new BigNumber(res).div(10 ** decimals).toNumber();
             resolve(totalSupply);
+        }).catch(function (error) {
+            reject(error);
+        });
+    })
+}
+
+export const getDappABI = async (dapp) => {
+    return new Promise((resolve, reject) => {
+        let data = "0x21e0d2d4000000000000000000000000" + dapp.substr(2);
+        let params = JSON.stringify({ "jsonrpc": "2.0", "method": "scs_directCall", "params": [{ "to": process.env.MICRO_CHAIN, "dappAddr": process.env.DAPP_BASE_ADDR, "data": data }], "id": Math.floor((Math.random() * 100) + 1) })
+        axios.post(process.env.SCS_URI, params).then(function (response) {
+            let abi = Web3EthAbi.decodeParameter('string', response.data.result);
+            resolve(abi);
+        }).catch(function (error) {
+            reject(error);
+        });
+    })
+}
+
+export const getTotalOperation = async () => {
+    return new Promise((resolve, reject) => {
+        let params = JSON.stringify({ "jsonrpc": "2.0", "method": "mc_call", "params": [{ "to": process.env.MICRO_CHAIN, "data": "0xfae67d40" }, "latest"], "id": Math.floor((Math.random() * 100) + 1) })
+        axios.post(process.env.VNODE_URI, params).then(function (response) {
+            let totalOperation = Web3EthAbi.decodeParameter('uint256', response.data.result);
+            resolve(chain3.fromSha(totalOperation.toString()));
+        }).catch(function (error) {
+            reject(error);
+        });
+    })
+}
+
+export const getFlushStatus = async () => {
+    return new Promise((resolve, reject) => {
+        let params = JSON.stringify({ "jsonrpc": "2.0", "method": "mc_call", "params": [{ "to": process.env.MICRO_CHAIN, "data": "0xab3c7d87" }, "latest"], "id": Math.floor((Math.random() * 100) + 1) })
+        axios.post(process.env.VNODE_URI, params).then(function (response) {
+            let status = Web3EthAbi.decodeParameter('bool', response.data.result);
+            resolve(status);
         }).catch(function (error) {
             reject(error);
         });
