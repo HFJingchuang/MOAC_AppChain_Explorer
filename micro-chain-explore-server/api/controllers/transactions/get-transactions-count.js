@@ -1,3 +1,5 @@
+const BigNumber = require('bignumber.js')
+
 module.exports = {
 
 
@@ -18,22 +20,19 @@ module.exports = {
 
 
   fn: async function () {
-    let transactionsList;
-    let count;
+    let transactionsList = await TradesCruve.find({ select: ['time', 'count'] }).sort([{ time: 'DESC' }]).limit(90);
+    let latestZeroTime = new BigNumber(new Date(transactionsList[0].time).getTime() + 86400000).div(1000).toNumber();
     var db = Transactions.getDatastore().manager;
     var collection = db.collection(Transactions.tableName);
-    var now = parseInt(new Date().getTime() / 1000);
-    var ninetyDay = now - 90 * 24 * 3600;
-    transactionsList = await collection.aggregate([
-      { $match: { time: { $gt: ninetyDay } } },
+    let _transactionsList = await collection.aggregate([
+      { $match: { time: { $gt: latestZeroTime } } },
       { $project: { "_id": 0, "yearMonthDay": { $dateToString: { format: "%Y-%m-%d", date: { $add: [new Date(0), 28800000, { $multiply: ["$time", 1000] }] } } } } },
       { $group: { "_id": "$yearMonthDay", count: { $sum: 1 } } },
-      { $project: { "_id": 0,"time": "$_id", "count": 1 } },
+      { $project: { "_id": 0, "time": "$_id", "count": 1 } },
       { $sort: { "time": -1 } }]).toArray();
-    count = transactionsList.length;
+    transactionsList.unshift(_transactionsList[0]);
     return Utils._return(ResultCode.OK_GET_TRADE_LIST, {
       data: transactionsList,
-      count: count
     });
   }
 

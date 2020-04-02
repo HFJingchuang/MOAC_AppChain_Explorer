@@ -25,6 +25,7 @@ module.exports = {
         for (blockNumToDB; blockNumToDB <= blockNum; blockNumToDB++) {
           let info = await Utils.getBlocks(blockNumToDB);
           let transactions = info.transactions;
+          let length = transactions.length;
           let block = {
             extra_data: info.extraData,
             hash: info.hash,
@@ -38,7 +39,7 @@ module.exports = {
             transactions_length: transactions.length,
             transactions_root: info.transactionsRoot
           }
-          if (info.transactions.length > 0) {
+          if (length > 0) {
             let txInfos = [];
             let addrSet = new Set();
             let tokenSet = new Set();
@@ -120,6 +121,16 @@ module.exports = {
             }
             if (txInfos.length > 0) {
               await Transactions.createEach(txInfos);
+            }
+
+            let counts = await BlocksCruve.find({ trades: length }).limit(1);
+            if (counts.length == 0) {
+              BlocksCruve.create({
+                blocks: 1,
+                trades: length
+              })
+            } else {
+              BlocksCruve.update({ trades: length }).set({ blocks: blocks + 1 })
             }
           }
           await Blocks.create(block);

@@ -1,5 +1,5 @@
-const Chain3 = require('chain3')
-const BigNumber = require('bignumber.js')
+const Chain3 = require('chain3');
+const BigNumber = require('bignumber.js');
 const abiDecoder = require('abi-decoder');
 const Web3EthAbi = require('web3-eth-abi');
 const axios = require("axios");
@@ -25,6 +25,27 @@ exports.isERC20 = async function (dappAddr) {
         let _totalSupply = await getTotalSupply(dappAddr);
         let totalSupply = new BigNumber(_totalSupply).div(10 ** decimals).toString();
         return { name: name, symbol: symbol, decimals: decimals, totalSupply: totalSupply }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+// 获取零点时间戳
+exports.getZeroTime = async function (t) {
+    try {
+        let unixtime = t * 1000;
+        let unixTimestamp = new Date(unixtime);
+        let Y = unixTimestamp.getFullYear();
+        let M =
+            unixTimestamp.getMonth() + 1 >= 10
+                ? unixTimestamp.getMonth() + 1
+                : '0' + (unixTimestamp.getMonth() + 1);
+        let D =
+            unixTimestamp.getDate() >= 10
+                ? unixTimestamp.getDate()
+                : '0' + unixTimestamp.getDate();
+        let toDay = Y + '-' + M + '-' + D;
+        return new BigNumber(new Date(toDay).getTime() + 86400000).div(1000).toNumber();
     } catch (error) {
         console.log(error)
     }

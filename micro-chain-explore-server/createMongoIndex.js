@@ -43,6 +43,9 @@ var indexData = [
             time: -1,
             createdAt: -1
         }, {
+            from: -1,
+            createdAt: -1
+        }, {
             to: -1,
             createdAt: -1
         }, {
@@ -50,7 +53,12 @@ var indexData = [
         }, {
             from: -1,
             to: -1,
-            time: -1
+            time: -1,
+            createdAt: -1
+        }, {
+            from: -1,
+            to: -1,
+            createdAt: -1
         }]
     },
     {
@@ -68,6 +76,17 @@ var indexData = [
             createdAt: -1
         }]
 
+    }, {
+        tableName: 'TradesCruve',
+        index: [{
+            time: -1
+        }]
+    },
+    {
+        tableName: 'BlocksCruve',
+        index: [{
+            trades: -1
+        }]
     }
 ]
 
