@@ -130,7 +130,7 @@ module.exports = {
                 trades: txlength
               })
             } else {
-              BlocksCruve.update({ trades: txlength }).set({ blocks: blocks + 1 })
+              BlocksCruve.update({ trades: txlength }).set({ blocks: counts[0].blocks + 1 })
             }
           }
           await Blocks.create(block);
