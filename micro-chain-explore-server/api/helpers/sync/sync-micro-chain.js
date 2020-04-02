@@ -125,12 +125,12 @@ module.exports = {
 
             let counts = await BlocksCruve.find({ trades: txlength }).limit(1);
             if (counts.length == 0) {
-              BlocksCruve.create({
+              await BlocksCruve.create({
                 blocks: 1,
                 trades: txlength
               })
             } else {
-              BlocksCruve.update({ trades: txlength }).set({ blocks: counts[0].blocks + 1 })
+              await BlocksCruve.update({ trades: txlength }).set({ blocks: counts[0].blocks + 1 })
             }
           }
           await Blocks.create(block);
