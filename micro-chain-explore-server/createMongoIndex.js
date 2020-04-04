@@ -1,10 +1,13 @@
 var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017";
+var url = "mongodb://localhost:27027";
 var dbName = "JingChuang";
 var indexData = [
     {
         tableName: 'blocks', // 表名
         index: [{
+            _id: 1,
+            hash: 1
+        }, {
             hash: -1,
             createdAt: -1
         }, {
@@ -36,6 +39,9 @@ var indexData = [
     {
         tableName: 'transactions',
         index: [{
+            _id: 1,
+            transaction_hash: 1
+        }, {
             block_hash: -1
         }, {
             transaction_hash: -1
@@ -71,6 +77,9 @@ var indexData = [
     {
         tableName: 'wallet',
         index: [{
+            _id: 1,
+            address: 1
+        }, {
             address: -1,
             balance: -1,
             createdAt: -1
