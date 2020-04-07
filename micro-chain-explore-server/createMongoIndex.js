@@ -86,13 +86,13 @@ var indexData = [
         }]
 
     }, {
-        tableName: 'tradesCruve',
+        tableName: 'tradescruve',
         index: [{
             time: -1
         }]
     },
     {
-        tableName: 'blocksCruve',
+        tableName: 'blockscruve',
         index: [{
             trades: -1
         }]
