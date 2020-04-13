@@ -45,7 +45,7 @@ exports.getZeroTime = async function (t) {
                 ? unixTimestamp.getDate()
                 : '0' + unixTimestamp.getDate();
         let toDay = Y + '-' + M + '-' + D;
-        return new BigNumber(new Date(toDay).getTime() + 86400000).div(1000).toNumber();
+        return new BigNumber(new Date(toDay).getTime() - 28800000).div(1000).toNumber();
     } catch (error) {
         console.log(error)
     }

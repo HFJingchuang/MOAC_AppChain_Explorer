@@ -33,7 +33,7 @@ module.exports = {
     let _latestTime = await TradesCruve.find({ select: ['time'] }).sort([{ time: 'DESC' }]).limit(1);
     let _latestZeroTime;
     if (_latestTime.length > 0) {
-      _latestZeroTime = new BigNumber(new Date(_latestTime[0].time).getTime() + 86400000).div(1000).toNumber();
+      _latestZeroTime = new BigNumber(new Date(_latestTime[0].time).getTime() + 86400000 - 28800000).div(1000).toNumber();
     } else {
       _latestZeroTime = 0;
     }
