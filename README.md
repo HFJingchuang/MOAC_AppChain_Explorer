@@ -50,6 +50,12 @@ TRANSFER_SHA：Transfer事件sha3值(固定值，无需变更)
 
 ### 启动
 
+#### docker-compose方式启动（推荐）
+
+> docker-compose up -d
+
+#### 启动
+
 1.开始同步数据
 
 同步命令
@@ -66,6 +72,8 @@ TRANSFER_SHA：Transfer事件sha3值(固定值，无需变更)
 > npm run start //开发环境
 > 
 > npm run startpro //生产环境
+
+
 
 ### router说明
 

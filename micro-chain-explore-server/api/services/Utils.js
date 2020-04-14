@@ -128,6 +128,9 @@ const getName = async (token) => {
     var data = chain3.sha3('name()').substr(0, 10);
     let params = JSON.stringify({ "jsonrpc": "2.0", "method": "scs_directCall", "params": [{ "to": sails.config.custom.microChain, "dappAddr": token, "data": data }], "id": Math.floor((Math.random() * 100) + 1) })
     let response = await fetch.post(sails.config.custom.scsUri, params);
+    if (!response.data.result) {
+        return
+    }
     let name = Web3EthAbi.decodeParameter('string', response.data.result);
     return name;
 }
@@ -136,6 +139,9 @@ const getSymbol = async (token) => {
     var data = chain3.sha3('symbol()').substr(0, 10);
     let params = JSON.stringify({ "jsonrpc": "2.0", "method": "scs_directCall", "params": [{ "to": sails.config.custom.microChain, "dappAddr": token, "data": data }], "id": Math.floor((Math.random() * 100) + 1) })
     let response = await fetch.post(sails.config.custom.scsUri, params);
+    if (!response.data.result) {
+        return
+    }
     let symbol = Web3EthAbi.decodeParameter('string', response.data.result);
     return symbol;
 }
@@ -144,6 +150,9 @@ const getDecimals = async (token) => {
     var data = chain3.sha3('decimals()').substr(0, 10);
     let params = JSON.stringify({ "jsonrpc": "2.0", "method": "scs_directCall", "params": [{ "to": sails.config.custom.microChain, "dappAddr": token, "data": data }], "id": Math.floor((Math.random() * 100) + 1) })
     let response = await fetch.post(sails.config.custom.scsUri, params);
+    if (!response.data.result) {
+        return
+    }
     let decimals = Web3EthAbi.decodeParameter('uint8', response.data.result);
     return decimals;
 }
@@ -152,6 +161,9 @@ const getTotalSupply = async (token) => {
     var data = chain3.sha3('totalSupply()').substr(0, 10);
     let params = JSON.stringify({ "jsonrpc": "2.0", "method": "scs_directCall", "params": [{ "to": sails.config.custom.microChain, "dappAddr": token, "data": data }], "id": Math.floor((Math.random() * 100) + 1) })
     let response = await fetch.post(sails.config.custom.scsUri, params);
+    if (!response.data.result) {
+        return
+    }
     let totalSupply = Web3EthAbi.decodeParameter('uint256', response.data.result);
     return totalSupply;
 }

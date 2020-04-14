@@ -1,0 +1,17 @@
+version: '3.7'
+services:
+  mongo:
+    image: mongo:latest
+    ports:
+        - 11337:1337
+    expose:
+        - "27017"
+    # volumes:
+    #     -  /data/mongodb/log:/var/log/mongodb/mongod.log
+    #     -  /data/mongodb:/var/lib/mongodb
+    restart: always
+
+  explorer:
+    image: gwang74/appchain_explorer:1.0.3
+    network_mode: "service:mongo"
+    restart: always

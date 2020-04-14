@@ -21,7 +21,12 @@ module.exports = {
 
   fn: async function () {
     let transactionsList = await TradesCruve.find({ select: ['time', 'count'] }).sort([{ time: 'DESC' }]).limit(90);
-    let latestZeroTime = new BigNumber(new Date(transactionsList[0].time).getTime() - 28800000).div(1000).toNumber();
+    let latestZeroTime
+    if (transactionsList.length > 0) {
+      latestZeroTime = new BigNumber(new Date(transactionsList[0].time).getTime() - 28800000).div(1000).toNumber();
+    } else {
+      latestZeroTime = 0;
+    }
     var db = Transactions.getDatastore().manager;
     var collection = db.collection(Transactions.tableName);
     let _transactionsList = await collection.aggregate([
@@ -31,9 +36,9 @@ module.exports = {
       { $project: { "_id": 0, "time": "$_id", "count": 1 } },
       { $sort: { "time": -1 } }]).toArray();
     transactionsList.unshift(_transactionsList[0]);
+
     return Utils._return(ResultCode.OK_GET_TRADE_LIST, {
       data: transactionsList,
     });
   }
-
 };
