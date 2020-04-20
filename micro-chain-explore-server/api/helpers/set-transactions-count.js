@@ -20,7 +20,6 @@ module.exports = {
 
   fn: async function () {
     let transactionsList;
-    let count;
     var db = Transactions.getDatastore().manager;
     var collection = db.collection(Transactions.tableName);
     let latestTime = await Transactions.find({ select: ['time'] }).sort([{ time: 'DESC' }]).limit(1);
@@ -46,7 +45,7 @@ module.exports = {
       { $group: { "_id": "$yearMonthDay", count: { $sum: 1 } } },
       { $project: { "_id": 0, "time": "$_id", "count": 1 } },
       { $sort: { "time": -1 } }]).toArray();
-    count = transactionsList.length;
+
     if (transactionsList.length > 0) {
       await TradesCruve.createEach(transactionsList);
     }
