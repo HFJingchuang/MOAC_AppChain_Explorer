@@ -24,6 +24,9 @@ exports.isERC20 = async function (dappAddr) {
         let decimals = await getDecimals(dappAddr);
         let _totalSupply = await getTotalSupply(dappAddr);
         let totalSupply = new BigNumber(_totalSupply).div(10 ** decimals).toString();
+        if (name || symbol || decimals || totalSupply) {
+            return
+        }
         return { name: name, symbol: symbol, decimals: decimals, totalSupply: totalSupply }
     } catch (error) {
         console.log(error)
